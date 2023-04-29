@@ -8,14 +8,19 @@ from tqdm import tqdm
 import glob
 import random
 
+def check_path(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+# Load data
 data_path = 'datasets/micro_doppler_img'
-anno_path = 'datasets/anno'
+target_path = 'datasets/micro_doppler_50train'
+check_path(target_path)
+anno_path = os.path.join(target_path, 'anno')
+check_path(anno_path)
+
 data_list = glob.glob(os.path.join(data_path, '*.jpg'))
 data_list = [data.split('/')[-1] for data in data_list]
-
-"""
-433 samples in total. A half of them is 'Walking'. 
-"""
 
 full_data = {
     'walking': [data for data in data_list if 'WALKING' in data],  # 222
@@ -24,8 +29,9 @@ full_data = {
     'hands': [data for data in data_list if 'HANDS' in data],  # 60
 }
 
-val_ratio = 0.2
-test_ratio = 0.2
+# Split train, val, test
+val_ratio = 0.25
+test_ratio = 0.25
 
 splits = {
     'train': [],
@@ -33,7 +39,7 @@ splits = {
     'test': []
 }
 
-random.seed(7)  # reproducable
+random.seed(666)  # reproducable
 for k in full_data:
     random.shuffle(full_data[k])
     num = len(full_data[k])
@@ -43,8 +49,7 @@ for k in full_data:
     splits['val'] += full_data[k][interval1:interval2]
     splits['train'] += full_data[k][interval2:]
 
-# create annotation file
-
+# Create annotation file
 def label_img(filename):
     """
     Create human active label. 

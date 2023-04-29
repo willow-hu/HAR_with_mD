@@ -5,9 +5,14 @@ import os
 import shutil
 import glob
 
-anno_path = 'datasets/micro_doppler/anno'
+
+def check_path(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+anno_path = 'datasets/micro_doppler_50train/anno'
 source_path = 'datasets/micro_doppler_img'
-target_path = 'datasets/micro_doppler'
+target_path = 'datasets/micro_doppler_50train'
 
 annos = glob.glob(os.path.join(anno_path, '*.txt'))
 
@@ -18,4 +23,6 @@ for ann in annos:
         for line in lines:
             image_file = line.split(' ')[0]
             img_fname = image_file.split('/')[-1]
-            shutil.copyfile(os.path.join(source_path, image_file), os.path.join(target_path, split, img_fname))
+            split_path = os.path.join(target_path, split)
+            check_path(split_path)
+            shutil.copyfile(os.path.join(source_path, image_file), os.path.join(split_path, img_fname))
