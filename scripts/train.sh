@@ -1,8 +1,6 @@
-CONFIG_FILE='configs/resnet/resnet18_8xb32_md.py'
-GPU_NUM=1
-WORK_DIR='work_dirs/microD_50train_lr0.1'
+CONFIG_FILE='configs/resnet/resnet34_8xb32_md.py'
+WORK_DIR='work_dirs/microD_50train_r34_lr0.1'
 
-bash ./tools/dist_train.sh \
+python tools/train.py \
 $CONFIG_FILE \
-$GPU_NUM \
 --work-dir $WORK_DIR \ 
