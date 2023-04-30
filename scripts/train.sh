@@ -1,5 +1,5 @@
-CONFIG_FILE='configs/vision_transformer/vit-base-p16_64xb64_md.py'
-WORK_DIR='work_dirs/microD_50train_vit'
+CONFIG_FILE='configs/resnet/resnet34_8xb32_md.py'
+WORK_DIR='work_dirs/microD_subj_r34'
 
 python tools/train.py \
 $CONFIG_FILE \

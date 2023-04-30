@@ -10,9 +10,9 @@ def check_path(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-anno_path = 'datasets/micro_doppler_50train/anno'
+anno_path = 'datasets/micro_doppler_subj/anno'
 source_path = 'datasets/micro_doppler_img'
-target_path = 'datasets/micro_doppler_50train'
+target_path = 'datasets/micro_doppler_subj'
 
 annos = glob.glob(os.path.join(anno_path, '*.txt'))
 

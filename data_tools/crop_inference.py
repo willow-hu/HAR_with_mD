@@ -27,7 +27,7 @@ def pad_img(image):
     output_array = np.pad(input_array, ((0, 0), (padding_left, padding_right)), mode='constant')
     return output_array
 
-sample_path = 'datasets/micro_doppler_50train/test'
+sample_path = 'datasets/micro_doppler_subj/test'
 
 files = glob.glob(os.path.join(sample_path, '*.jpg'))
 for img_file in files:
